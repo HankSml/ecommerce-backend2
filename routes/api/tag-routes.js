@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
     const tagData = await Tag.findAll({
       include: [{model: Product}]
     });
+    res.status(200).json(tagData);
   } catch (err) {
     console.log(err)
     res.status(500).json(err)
@@ -23,6 +24,7 @@ router.get('/:id', async (req, res) => {
     const tagData = await Tag.findByPk(req.params.id, {
       include: [{model: Product}]
     });
+    res.status(200).json(tagData);
   } catch (err) {
     console.log(err)
     res.status(500).json(err)
@@ -35,6 +37,7 @@ router.post('/', async (req, res) => {
     const newTagData = await Tag.create({
       tag_name: req.body.tag_name
     });
+    res.status(200).json(newTagData);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -47,6 +50,7 @@ router.put('/:id', async (req, res) => {
     const updatedTag = await Tag.findByPk(req.params.id);
     updatedTag.tag_name = req.body.tag_name;
     updatedTag.save();
+    res.status(200).json(updatedTag);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -61,6 +65,7 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     });
+    res.status(200).json('Successfully deleted!')
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
